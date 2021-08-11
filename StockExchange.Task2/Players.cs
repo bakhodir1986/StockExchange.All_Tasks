@@ -6,7 +6,7 @@
         public Blossomers Blossomers { get; set; }
 
         public Players()
-        {
+        { 
         }
 
         public Players(RedSocks redSocks, Blossomers blossomers)

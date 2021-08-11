@@ -2,15 +2,16 @@
 
 namespace StockExchange.Task2
 {
-    public class Blossomers : IPlayer
+    public class RossStones : IPlayer
     {
-        private string _uniqueId = "#1";
+        private string _uniqueId = "#3";
         private IStockExchangeMediator _mediator;
-
-        public Blossomers(IStockExchangeMediator mediator)
+        public RossStones(IStockExchangeMediator mediator)
         {
             _mediator = mediator;
         }
+
+        public IStockExchangeMediator ExchangeMediator { get; set; }
 
         public bool SellOffer(string stockName, int numberOfShares)
         {
