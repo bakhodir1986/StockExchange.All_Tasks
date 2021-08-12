@@ -4,7 +4,7 @@ namespace StockExchange.Task2
 {
     public class Blossomers : IPlayer
     {
-        private string _uniqueId = "#1";
+        private string _uniqueId = Guid.NewGuid().ToString();
         private IStockExchangeMediator _mediator;
 
         public Blossomers(IStockExchangeMediator mediator)

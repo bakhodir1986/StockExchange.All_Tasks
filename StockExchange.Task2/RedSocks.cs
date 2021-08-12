@@ -4,7 +4,7 @@ namespace StockExchange.Task2
 {
     public class RedSocks : IPlayer
     {
-        private string _uniqueId = "#2";
+        private string _uniqueId = Guid.NewGuid().ToString();
         private IStockExchangeMediator _mediator;
         public RedSocks(IStockExchangeMediator mediator)
         {
