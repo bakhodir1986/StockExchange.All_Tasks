@@ -13,5 +13,9 @@ namespace StockExchange.Task4
         bool Notify(StockObject stockObject);
 
         void NotifyDeal(IPlayer player, int NumberOfShares);
+
+        delegate void NotifyDealDelagate(int soldShares, int boughtShares);
+
+        event NotifyDealDelagate notifyDealEvent;
     }
 }

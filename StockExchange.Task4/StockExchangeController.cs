@@ -8,13 +8,13 @@ namespace StockExchange.Task4
     public class StockExchangeController : IStockExchangeMediator
     {
         private List<StockObject> StockObjects;
-        private List<IPlayer> subcribers;
 
         public StockExchangeController()
         {
             StockObjects = new List<StockObject>();
-            subcribers = new List<IPlayer>();
         }
+
+        public event IStockExchangeMediator.NotifyDealDelagate notifyDealEvent;
 
         public bool Notify(StockObject stockObject)
         {
@@ -42,18 +42,18 @@ namespace StockExchange.Task4
 
         public void NotifyDeal(IPlayer player, int NumberOfShares)
         {
-            player.Update(NumberOfShares, NumberOfShares);
+            notifyDealEvent(NumberOfShares, NumberOfShares);
 
         }
 
         public void Subcribe(IPlayer player)
         {
-            subcribers.Add(player);
+            notifyDealEvent += player.Update;
         }
 
         public void UnSubcribe(IPlayer player)
         {
-            subcribers.Remove(player);
+            notifyDealEvent -= player.Update;
         }
     }
 }
