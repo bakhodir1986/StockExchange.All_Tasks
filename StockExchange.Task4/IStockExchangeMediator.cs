@@ -10,12 +10,9 @@ namespace StockExchange.Task4
 
         void UnSubcribe(IPlayer player);
 
-        bool Notify(StockObject stockObject);
+        bool Notify(StockObject firstPlayersStockObject);
 
-        void NotifyDeal(IPlayer player, int NumberOfShares);
+        void NotifyDeal(IPlayer player, int numberOfShares);
 
-        delegate void NotifyDealDelagate(int soldShares, int boughtShares);
-
-        event NotifyDealDelagate notifyDealEvent;
     }
 }

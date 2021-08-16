@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StockExchange.Task3
+﻿namespace StockExchange.Task3
 {
     public class StockObject
     {

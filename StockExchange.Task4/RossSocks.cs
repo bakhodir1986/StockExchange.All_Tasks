@@ -4,7 +4,7 @@ namespace StockExchange.Task4
 {
     public class RossSocks : IPlayer
     {
-        private IStockExchangeMediator _mediator;
+        private readonly IStockExchangeMediator _mediator;
 
         public RossSocks(IStockExchangeMediator mediator)
         {
@@ -14,9 +14,9 @@ namespace StockExchange.Task4
         private int _soldShares;
         private int _boughtShares;
 
-        public int SoldShares { get { return _soldShares; } }
+        public int SoldShares => _soldShares;
 
-        public int BoughtShares { get { return _boughtShares; } }
+        public int BoughtShares => _boughtShares;
 
         public bool SellOffer(string stockName, int numberOfShares)
         {

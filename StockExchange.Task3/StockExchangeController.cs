@@ -7,53 +7,54 @@ namespace StockExchange.Task3
 {
     public class StockExchangeController : IStockExchangeMediator
     {
-        private List<StockObject> StockObjects;
-        private List<IPlayer> subcribers;
+        private readonly List<StockObject> _stockObjects;
+        private readonly List<IPlayer> _subcribers;
 
         public StockExchangeController()
         {
-            StockObjects = new List<StockObject>();
-            subcribers = new List<IPlayer>();
+            _stockObjects = new List<StockObject>();
+            _subcribers = new List<IPlayer>();
         }
 
-        public bool Notify(StockObject stockObject)
+        public bool Notify(StockObject firstPlayersStockObject)
         {
-            var matchResults = StockObjects.Where(x => x.Player != stockObject.Player
-                                                 && x.Name.Equals(stockObject.Name) &&
-                                                 x.NumberOfShares == stockObject.NumberOfShares &&
-                                                 x.EventType != stockObject.EventType);
+            var matchResults = _stockObjects.Where(x => x.Player != firstPlayersStockObject.Player
+                                                 && x.Name.Equals(firstPlayersStockObject.Name) &&
+                                                 x.NumberOfShares == firstPlayersStockObject.NumberOfShares &&
+                                                 x.EventType != firstPlayersStockObject.EventType);
 
-            if (matchResults.Any())
+            var stockObjects = matchResults as StockObject[] ?? matchResults.ToArray();
+            if (stockObjects.Any())
             {
-                var secondPlayer = matchResults.First();
+                var secondPlayersStockObject = stockObjects.First();
 
-                NotifyDeal(stockObject.Player, stockObject.NumberOfShares);
-                NotifyDeal(secondPlayer.Player, stockObject.NumberOfShares);
+                NotifyDeal(firstPlayersStockObject.Player, firstPlayersStockObject.NumberOfShares);
+                NotifyDeal(secondPlayersStockObject.Player, secondPlayersStockObject.NumberOfShares);
 
-                StockObjects.Remove(secondPlayer);
+                _stockObjects.Remove(secondPlayersStockObject);
 
                 return true;
             }
 
-            StockObjects.Add(stockObject);
+            _stockObjects.Add(firstPlayersStockObject);
 
             return false;
         }
 
-        public void NotifyDeal(IPlayer player, int NumberOfShares)
+        public void NotifyDeal(IPlayer player, int numberOfShares)
         {
-            player.Update(NumberOfShares, NumberOfShares);
+            player.Update(numberOfShares, numberOfShares);
 
         }
 
         public void Subcribe(IPlayer player)
         {
-            subcribers.Add(player);
+            _subcribers.Add(player);
         }
 
         public void UnSubcribe(IPlayer player)
         {
-            subcribers.Remove(player);
+            _subcribers.Remove(player);
         }
     }
 }

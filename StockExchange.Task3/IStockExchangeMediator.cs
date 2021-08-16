@@ -10,7 +10,7 @@ namespace StockExchange.Task3
 
         void UnSubcribe(IPlayer player);
 
-        bool Notify(StockObject stockObject);
+        bool Notify(StockObject firstPlayersStockObject);
 
         void NotifyDeal(IPlayer player, int NumberOfShares);
     }

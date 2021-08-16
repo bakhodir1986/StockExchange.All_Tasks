@@ -4,22 +4,17 @@
     {
         public Players CreatePlayers()
         {
-            var meditor = new StockExchangeController();
+            var mediator = new StockExchangeController();
 
-            var redSocks = new RedSocks(meditor);
-            var blossomers = new Blossomers(meditor);
-            var rossSocks = new RossSocks(meditor);
+            var redSocks = new RedSocks(mediator);
+            var blossomers = new Blossomers(mediator);
+            var rossSocks = new RossSocks(mediator);
 
-            meditor.Subcribe(redSocks);
-            meditor.Subcribe(blossomers);
-            meditor.Subcribe(rossSocks);
+            mediator.Subcribe(redSocks);
+            mediator.Subcribe(blossomers);
+            mediator.Subcribe(rossSocks);
 
-            return new Players
-            {
-                RedSocks = redSocks,
-                Blossomers = blossomers,
-                RossSocks = rossSocks
-            };
+            return new Players(redSocks, blossomers, rossSocks);
         }
     }
 }
